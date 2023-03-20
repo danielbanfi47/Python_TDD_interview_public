@@ -8,23 +8,27 @@ from sum.sum_of_positives import sum_of_positives
 class TestSumOfPositives(unittest.TestCase):
     def test_valid_int_numbers(self):
         assert sum_of_positives(3, 2) == 5
+        assert sum_of_positives(1, 1) == 2
 
     @unittest.skip("Step 2")
     def test_valid_float_numbers(self):
         assert sum_of_positives(3.1, 2) == 5
-
         assert sum_of_positives(3.6, 2.5) == 6
 
     @unittest.skip("Step 3")
     def test_valid_float_string_numbers(self):
         assert sum_of_positives("3.1", 2) == 5
-
         assert sum_of_positives("3.9", 2.2) == 6
 
     @unittest.skip("Step 4")
-    def test_invalid_negative_numbers(self):
+    def test_invalid_numbers(self):
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(-3, 2)
+
+        self.assertIn("positive", str(ve.exception))
+
+        with self.assertRaises(ValueError) as ve:
+            sum_of_positives(0, 2)
 
         self.assertIn("positive", str(ve.exception))
 
