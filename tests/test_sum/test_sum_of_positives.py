@@ -13,9 +13,13 @@ class TestSumOfPositives(unittest.TestCase):
     def test_valid_float_numbers(self):
         assert sum_of_positives(3.1, 2) == 5
 
+        assert sum_of_positives(3.6, 2.5) == 6
+
     @unittest.skip("Step 3")
     def test_valid_float_string_numbers(self):
         assert sum_of_positives("3.1", 2) == 5
+
+        assert sum_of_positives("3.9", 2.2) == 6
 
     @unittest.skip("Step 4")
     def test_invalid_negative_numbers(self):
