@@ -44,24 +44,28 @@ class TestSumOfPositives(unittest.TestCase):
     def test_invalid_not_number(self):
         with self.assertRaises(ValueError) as ve:
             sum_of_positives("a", 2)
-
-        self.assertIn("number", str(ve.exception))
+        self.assertIn("not number", str(ve.exception))
 
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(1, "2a")
+        self.assertIn("not number", str(ve.exception))
 
-        self.assertIn("number", str(ve.exception))
+        with self.assertRaises(ValueError) as ve:
+            sum_of_positives(1, [2, 1])
+        self.assertIn("not number", str(ve.exception))
+
+        with self.assertRaises(ValueError) as ve:
+            sum_of_positives(1, ["2", 1])
+        self.assertIn("not number", str(ve.exception))
 
     @unittest.skip("Step 6")
     def test_invalid_str_number(self):
         with self.assertRaises(ValueError) as ve:
             sum_of_positives("3,1", 2)
-
         self.assertIn("valid numbers", str(ve.exception))
 
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(2, "3,1")
-
         self.assertIn("valid numbers", str(ve.exception))
 
     @unittest.skip("Step 7")
