@@ -19,17 +19,25 @@ class TestSumOfPositives(unittest.TestCase):
     def test_valid_float_string_numbers(self):
         assert sum_of_positives("3.1", 2) == 5
         assert sum_of_positives("3.9", 2.2) == 6
+        assert sum_of_positives("3", 2) == 5
+        assert sum_of_positives(3.9, "2.2") == 6
 
     @unittest.skip("Step 4")
     def test_invalid_numbers(self):
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(-3, 2)
+        self.assertIn("positive", str(ve.exception))
 
+        with self.assertRaises(ValueError) as ve:
+            sum_of_positives(3, -2)
         self.assertIn("positive", str(ve.exception))
 
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(0, 2)
+        self.assertIn("positive", str(ve.exception))
 
+        with self.assertRaises(ValueError) as ve:
+            sum_of_positives(2, 0)
         self.assertIn("positive", str(ve.exception))
 
     @unittest.skip("Step 5")
