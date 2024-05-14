@@ -29,14 +29,15 @@ class TestSumOfPositives(unittest.TestCase):
         the result is rounded down (after the addition)
         """
         assert sum_of_positives("3.1", 2) == 5
-        assert sum_of_positives("3.9", 2.2) == 6
+        assert sum_of_positives("3.8", 2.3) == 6
         assert sum_of_positives("3", 2) == 5
-        assert sum_of_positives(3.9, "2.2") == 6
+        assert sum_of_positives(3.9, "2.8") == 6
 
     @unittest.skip("Step 4")
     def test_invalid_numbers(self):
         """
         Test of invalid numbers; 0 or negative
+        The app gives back the desired type of exception with at least a desired part of message
         """
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(-3, 2)
@@ -58,6 +59,7 @@ class TestSumOfPositives(unittest.TestCase):
     def test_invalid_not_number(self):
         """
         Test the exception raising in case of any input is not valid
+        The app gives back the desired type of exception with at least a desired part of message
         """
         with self.assertRaises(ValueError) as ve:
             sum_of_positives("3,1", 2)
