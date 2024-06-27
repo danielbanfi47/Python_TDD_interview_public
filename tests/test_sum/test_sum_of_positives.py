@@ -36,7 +36,7 @@ class TestSumOfPositives(unittest.TestCase):
     @unittest.skip("Step 4")
     def test_invalid_numbers(self):
         """
-        Test of invalid numbers; 0 or negative
+        Test of invalid numbers, these are: 0 or negative
         The app gives back the desired type of exception with at least a desired part of message
         """
         with self.assertRaises(ValueError) as ve:
@@ -49,11 +49,11 @@ class TestSumOfPositives(unittest.TestCase):
 
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(0, 2)
-        self.assertIn("positive", str(ve.exception))
+        self.assertIn("not zero", str(ve.exception))
 
         with self.assertRaises(ValueError) as ve:
             sum_of_positives(2, 0)
-        self.assertIn("positive", str(ve.exception))
+        self.assertIn("not zero", str(ve.exception))
 
     @unittest.skip("Step 5")
     def test_invalid_not_number(self):
@@ -77,11 +77,11 @@ class TestSumOfPositives(unittest.TestCase):
             sum_of_positives(1, "2a")
         self.assertIn("valid number", str(ve.exception))
 
-        with self.assertRaises(ValueError) as ve:
+        with self.assertRaises(TypeError) as ve:
             sum_of_positives(1, [2, 1])
         self.assertIn("number or string", str(ve.exception))
 
-        with self.assertRaises(ValueError) as ve:
+        with self.assertRaises(TypeError) as ve:
             sum_of_positives(1, ["2", 1])
         self.assertIn("number or string", str(ve.exception))
 
@@ -111,6 +111,9 @@ class TestSumOfPositives(unittest.TestCase):
         self.assertNotIn("The message is:", mock_out.getvalue())
 
         sum_of_positives(1, 2, [3])
+        self.assertNotIn("The message is:", mock_out.getvalue())
+
+        sum_of_positives(1, 2, ["3"])
         self.assertNotIn("The message is:", mock_out.getvalue())
 
     @unittest.skip("Step 8")
